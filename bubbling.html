@@ -1,0 +1,19 @@
+<table border="1">
+  <tr>
+    <td id="td00">1</td>
+    <td id="td01">2</td>
+    <td id="td02">3</td>
+  </tr>
+</table>
+<script>
+document.querySelector('#td00').addEventListener('click', (event) => {
+  console.log('td', event.target, event.currentTarget);
+}, { useCapture: true });
+document.querySelector('tr').addEventListener('click', (event) => {
+  console.log('tr', event.target, event.currentTarget);
+}, true);
+document.querySelector('table').addEventListener('click', (event) => {
+  console.log('table', event.target, event.currentTarget);
+}, true);
+</script>
+  
