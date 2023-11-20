@@ -2,27 +2,31 @@
 <body>
 <table border="1">
   <tr>
-    <td id="td00">1</td>
-    <td id="td01">2</td>
-    <td id="td02">3</td>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
   </tr>
 </table>
 <script>
-document.querySelector('#td00').addEventListener('click', (event) => {
+document.querySelector('td').addEventListener('click', (event) => {
   console.log('td');
   console.log(event.target);
   console.log(event.currentTarget);
-});
+}, true);
 document.querySelector('tr').addEventListener('click', (event) => {
   console.log('tr');
   console.log(event.target);
   console.log(event.currentTarget);
-});
+}, true);
 document.querySelector('table').addEventListener('click', (event) => {
   console.log('table');
   console.log(event.target);
   console.log(event.currentTarget);
-});
+}, true);
+
+console.log(document.querySelector('td').parentNode); // tr 태그
+console.log(document.querySelector('tr').children); // [td, td, td]
+
 </script>
 </body>
 </html>
