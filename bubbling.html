@@ -1,3 +1,5 @@
+<html>
+<body>
 <table border="1">
   <tr>
     <td id="td00">1</td>
@@ -7,13 +9,20 @@
 </table>
 <script>
 document.querySelector('#td00').addEventListener('click', (event) => {
-  console.log('td', event.target, event.currentTarget);
-}, { useCapture: true });
+  console.log('td');
+  console.log(event.target);
+  console.log(event.currentTarget);
+});
 document.querySelector('tr').addEventListener('click', (event) => {
-  console.log('tr', event.target, event.currentTarget);
-}, true);
+  console.log('tr');
+  console.log(event.target);
+  console.log(event.currentTarget);
+});
 document.querySelector('table').addEventListener('click', (event) => {
-  console.log('table', event.target, event.currentTarget);
-}, true);
+  console.log('table');
+  console.log(event.target);
+  console.log(event.currentTarget);
+});
 </script>
-  
+</body>
+</html>
