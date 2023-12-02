@@ -19,7 +19,7 @@
 <body>
 <form id="form">
   <input name="input" placeholder="6개의 숫자를 쉼표로 구분해 입력하세요." />
-  <button>시작</button>
+  <button>추첨</button>
 </form>
 <div id="result">추첨 결과는? </div>
 <div id="bonus">보너스: </div>
@@ -43,8 +43,18 @@ function colorize(number, $tag) {
     $tag.style.color = 'white';
   }
 }
+function drawBall(number, $parent) {
+  const $ball = document.createElement('div');
+  $ball.className = 'ball';
+  colorize(number, $ball);
+  $ball.textContent = number;
+  $parent.appendChild($ball);
+}
+const setTimeoutPromise = (ms) => new Promise((resolve, reject) => {
+  setTimeout(resolve, ms);
+});
 let clickable = true;
-$form.addEventListener('submit', (event) => {
+$form.addEventListener('submit', async (event) => {
   if (!clickable) {
     return;
   }
@@ -78,44 +88,37 @@ $form.addEventListener('submit', (event) => {
   const winBalls = shuffle.slice(0, 6).sort((a, b) => a - b);
   const bonus = shuffle[6];
   console.log(winBalls, bonus);
-  function drawBall(number, $parent) {
-    const $ball = document.createElement('div');
-    $ball.className = 'ball';
-    colorize(number, $ball);
-    $ball.textContent = number;
-    $parent.appendChild($ball);
-  }
+
   for (let i = 0; i < winBalls.length; i++) {
-    setTimeout(() => {
-      console.log(winBalls[i], i);
-      drawBall(winBalls[i], $result);
-    }, 1000 * (i + 1));
+    await setTimeoutPromise(1000);
+    console.log(winBalls[i], i);
+    drawBall(winBalls[i], $result);
   }
-  setTimeout(() => {
-    drawBall(bonus, $bonus);
-    let count = 0;
-    myNumbers.forEach((my) => {
-      if (winBalls.includes(my)) {
-        count++;
-      }
-    });
-    if (count === 6) {
-      alert('1등!! 현실 로또 당첨될 운을 여기에 쓰시다니...');
-    } else if (count === 5) {
-      if (myNumbers.includes(bonus)) {
-        alert('2등!! 보너스 공이지만 6개 맞추셨네요.');
-      } else {
-        alert('3등!! 아쉽습니다... 그래도 축하드려요!')
-      }
-    } else if (count === 4) {
-      alert('4등!! 5만원 축하드려요!');
-    } else if (count === 3) {
-      alert('5등!! 5천원 축하드려요!');
-    } else {
-      alert('로또 참 어렵죠?');
+  await setTimeoutPromise(1000);
+  drawBall(bonus, $bonus);
+  await setTimeoutPromise(0);
+  let count = 0;
+  myNumbers.forEach((my) => {
+    if (winBalls.includes(my)) {
+      count++;
     }
-    clickable = true;
-  }, 7000);
+  });
+  if (count === 6) {
+    alert('1등!! 현실 로또 당첨될 운을 여기에 쓰시다니...');
+  } else if (count === 5) {
+    if (myNumbers.includes(bonus)) {
+      alert('2등!! 보너스 공이지만 6개 맞추셨네요.');
+    } else {
+      alert('3등!! 아쉽습니다... 그래도 축하드려요!')
+    }
+  } else if (count === 4) {
+    alert('4등!! 5만원 축하드려요!');
+  } else if (count === 3) {
+    alert('5등!! 5천원 축하드려요!');
+  } else {
+    alert('로또 참 어렵죠?');
+  }
+  clickable = true;
 });
 </script>
 </body>
