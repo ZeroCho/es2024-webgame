@@ -79,8 +79,8 @@ function onClickCard() { // 클릭한 카드 확인 함수
    if (clicked.length !== 2) { 
     return;
   }
-    // 클릭한 두 카드 비교
-    const firstBackColor = clicked[0].querySelector('.card-back').style.backgroundColor;
+  // 클릭한 두 카드 비교
+  const firstBackColor = clicked[0].querySelector('.card-back').style.backgroundColor;
   const secondBackColor = clicked[1].querySelector('.card-back').style.backgroundColor;
   if (firstBackColor === secondBackColor) { // 두 카드의 색이 같으면
     completed.push(clicked[0]); // 완료 배열에 추가
