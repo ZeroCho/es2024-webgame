@@ -8,7 +8,7 @@
   display: inline-block; 
   margin-right: 20px;
   margin-bottom: 20px; 
-  width: 70px;
+  width: 80px;
   height: 100px; 
   perspective: 140px;
 }
@@ -23,7 +23,7 @@
 .card.flipped .card-inner { 
   transform: rotateY(180deg);
 }
-.card-front { 
+.card-back { 
   background: navy;
 }
 .card-front, .card-back { 
@@ -33,7 +33,7 @@
   border: 1px solid black; 
   backface-visibility: hidden;
 }
-.card-back {
+.card-front {
   transform: rotateY(180deg);
 }
 </style>
@@ -60,13 +60,13 @@ function createCard(i) {
   card.className = 'card'; // .card 태그 생성
   const cardInner = document.createElement('div'); 
   cardInner.className = 'card-inner'; // .card-inner 태그 생성 
-  const cardFront = document.createElement('div'); 
-  cardFront.className = 'card-front'; // .card-front 태그 생성 
   const cardBack = document.createElement('div'); 
-  cardBack.className = 'card-back'; // .card-back 태그 생성
-  cardBack.style.backgroundColor = shuffled[i]; 
-  cardInner.appendChild(cardFront); 
+  cardBack.className = 'card-back'; // .card-back 태그 생성 
+  const cardFront = document.createElement('div'); 
+  cardFront.className = 'card-front'; // .card-front 태그 생성
+  cardFront.style.backgroundColor = shuffled[i]; 
   cardInner.appendChild(cardBack); 
+  cardInner.appendChild(cardFront); 
   card.appendChild(cardInner);
   return card;
 }
@@ -80,9 +80,9 @@ function onClickCard() { // 클릭한 카드 확인 함수
     return;
   }
   // 클릭한 두 카드 비교
-  const firstBackColor = clicked[0].querySelector('.card-back').style.backgroundColor;
-  const secondBackColor = clicked[1].querySelector('.card-back').style.backgroundColor;
-  if (firstBackColor === secondBackColor) { // 두 카드의 색이 같으면
+  const front1Color = clicked[0].querySelector('.card-front').style.backgroundColor;
+  const front2Color = clicked[1].querySelector('.card-front').style.backgroundColor;
+  if (front1Color === front2Color) { // 두 카드의 색이 같으면
     completed.push(clicked[0]); // 완료 배열에 추가
     completed.push(clicked[1]); // 완료 배열에 추가
     clicked = []; // 클릭 배열 비우기
