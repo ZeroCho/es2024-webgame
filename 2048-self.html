@@ -89,7 +89,7 @@ function draw() {
   });
 }
 startGame();
-draw();
+
 function moveCells(direction) {
   history.push({
     table: JSON.parse(JSON.stringify(data)),
@@ -102,10 +102,10 @@ function moveCells(direction) {
         rowData.forEach((cellData, j) => {
           if (cellData) {
             const currentRow = newData[i];
-            const prevData = currentRow[currentRow.length - 1];
+            const prevData = currentRow.at(-1);
             if (prevData === cellData) { // 이전 값과 지금 값이 같으면
               const score = parseInt($score.textContent);
-              $score.textContent = score + currentRow[currentRow.length - 1] * 2;
+              $score.textContent = score + currentRow.at(-1) * 2;
               currentRow[currentRow.length - 1] *= -2;
             } else {
               newData[i].push(cellData);
@@ -127,10 +127,10 @@ function moveCells(direction) {
         rowData.forEach((cellData, j) => {
           if (rowData[3 - j]) {
             const currentRow = newData[i];
-            const prevData = currentRow[currentRow.length - 1];
+            const prevData = currentRow.at(-1);
             if (prevData === rowData[3 - j]) {
               const score = parseInt($score.textContent);
-              $score.textContent = score + currentRow[currentRow.length - 1] * 2;
+              $score.textContent = score + currentRow.at(-1) * 2;
               currentRow[currentRow.length - 1] *= -2;
             } else {
               newData[i].push(rowData[3 - j]);
@@ -152,10 +152,10 @@ function moveCells(direction) {
         rowData.forEach((cellData, j) => {
           if (cellData) {
             const currentRow = newData[j];
-            const prevData = currentRow[currentRow.length - 1];
+            const prevData = currentRow.at(-1);
             if (prevData === cellData) {
               const score = parseInt($score.textContent);
-              $score.textContent = score + currentRow[currentRow.length - 1] * 2;
+              $score.textContent = score + currentRow.at(-1) * 2;
               currentRow[currentRow.length - 1] *= -2;
             } else {
               newData[j].push(cellData);
@@ -177,10 +177,10 @@ function moveCells(direction) {
         rowData.forEach((cellData, j) => {
           if (data[3 - i][j]) {
             const currentRow = newData[j];
-            const prevData = currentRow[currentRow.length - 1];
+            const prevData = currentRow.at(-1);
             if (prevData === data[3 - i][j]) {
               const score = parseInt($score.textContent);
-              $score.textContent = score + currentRow[currentRow.length - 1] * 2;
+              $score.textContent = score + currentRow.at(-1) * 2;
               currentRow[currentRow.length - 1] *= -2;
             } else {
               newData[j].push(data[3 - i][j]);
