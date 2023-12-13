@@ -58,9 +58,7 @@ $form.addEventListener('submit', async (event) => {
   if (!clickable) {
     return;
   }
-  clickable = false;
-  $result.innerHTML = '';
-  $bonus.innerHTML = '';
+  clickable = false; // 클릭 제한
   event.preventDefault();
   const string = event.target.input.value;
   if (!string.trim()) {
