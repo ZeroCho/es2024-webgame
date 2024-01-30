@@ -55,11 +55,13 @@ const setTimeoutPromise = (ms) => new Promise((resolve, reject) => {
 });
 let clickable = true;
 $form.addEventListener('submit', async (event) => {
+  event.preventDefault();
   if (!clickable) {
     return;
   }
   clickable = false; // 클릭 제한
-  event.preventDefault();
+  $result.innerHTML = '당첨 숫자: ';
+  $bonus.innerHTML = '보너스 숫자: ';
   const string = event.target.input.value;
   if (!string.trim()) {
     return alert('숫자를 입력하세요.');
